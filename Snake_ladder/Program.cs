@@ -6,7 +6,8 @@ namespace Snake_ladder
    /// UC1 - initializing the single player at start position "0"
    /// UC2 - Using Random dice values are computed
    /// UC3 - Player's action is performed
-   /// Repeat the player till reaches wining position 100
+   /// UC4 - Repeat the player till reaches wining position 100
+   /// UC6 - Return no. of times dice rolled and it's position at each roll
    /// </summary>
     class Program
     {
@@ -22,10 +23,13 @@ namespace Snake_ladder
         // Function to compute firstplayer's dice value
         public static void Firstplayer()
         {
+            int player1roll = 0;
             while (player1Position != board_size)
             {
+                player1roll += 1;
                 Program.Dicerolled();
             }
+            Console.WriteLine("No of Times the Dice rolled By P1: " + player1roll);
         }
 
         // Function to compute dice values randomly
