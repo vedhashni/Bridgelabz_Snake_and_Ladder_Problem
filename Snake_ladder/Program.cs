@@ -6,6 +6,7 @@ namespace Snake_ladder
    /// UC1 - initializing the single player at start position "0"
    /// UC2 - Using Random dice values are computed
    /// UC3 - Player's action is performed
+   /// Repeat the player till reaches wining position 100
    /// </summary>
     class Program
     {
@@ -21,7 +22,10 @@ namespace Snake_ladder
         // Function to compute firstplayer's dice value
         public static void Firstplayer()
         {
-           Program.Dicerolled();
+            while (player1Position != board_size)
+            {
+                Program.Dicerolled();
+            }
         }
 
         // Function to compute dice values randomly
@@ -35,6 +39,7 @@ namespace Snake_ladder
         // Used to find the player's turn actions
         public static void Moves(int diceValue)
         {
+            int defaultPosition = player1Position;
             Random random = new Random();
             int option = random.Next(1, 4);
             switch (option)
@@ -44,13 +49,30 @@ namespace Snake_ladder
                     break;
 
                 case 2:
-                    Console.WriteLine("Ladder and current position is : " + (player1Position += diceValue));
+                    //Console.WriteLine("Ladder and current position is : " + (player1Position += diceValue));
+                    if (player1Position + diceValue <= board_size)
+                    {
+                        Console.WriteLine("Ladder and current position is : " + (player1Position += diceValue));
+                    }
+                    else
+                    {
+                        player1Position = defaultPosition;
+                    }
                     break;
 
                 case 3:
 
-                    player1Position = 0;
-                    Console.WriteLine("Snake Bite pushed down to : " + (player1Position -= diceValue));
+                    //player1Position = 0;
+                    //Console.WriteLine("Snake Bite pushed down to : " + (player1Position -= diceValue));
+                    if ((player1Position - diceValue) < 0)
+                    {
+                        player1Position = 0;
+                        Console.WriteLine("Snake Bite pushed down to: " + player1Position);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Snake Bite pushed down to : " + (player1Position -= diceValue));
+                    }
                     break;
 
             }
